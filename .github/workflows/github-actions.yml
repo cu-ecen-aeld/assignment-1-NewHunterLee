@@ -12,15 +12,20 @@ jobs:
         steps:
           - uses: actions/checkout@v2
           - name: Checkout submodules
-            run : git submodule update --init --recursive
+            run: git submodule update --init --recursive
           - name: Run unit test
             run: ./unit-test.sh
+
     full-test:
         container: cuaesd/aesd-autotest:24-assignment1
         runs-on: ubuntu-latest
         steps:
           - uses: actions/checkout@v2
           - name: Checkout submodules
-            run : git submodule update --init --recursive
+            run: git submodule update --init --recursive
+          
+          - name: Set execute permissions for scripts
+            run: chmod +x finder-app/writer.sh finder-app/finder.sh
+
           - name: Run full test
             run: ./full-test.sh
